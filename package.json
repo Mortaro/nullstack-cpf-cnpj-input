@@ -1,0 +1,15 @@
+{
+  "name": "nullstack-cpf-cnpj-input",
+  "version": "1.0.0",
+  "description": "CPF and CNPJ inputs for Nullstack",
+  "main": "src/index.js",
+  "author": "Mortaro",
+  "license": "MIT",
+  "repository": "github:Mortaro/nullstack-cpf-cnpj-input",
+  "devDependencies": {
+    "nullstack": "*"
+  },
+  "peerDependencies": {
+    "nullstack": "*"
+  }
+}
