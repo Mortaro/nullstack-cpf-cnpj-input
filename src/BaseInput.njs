@@ -37,7 +37,7 @@ class BaseInput extends Nullstack {
 
   maskCpfCnpj({value}) {
     const v = value.replace(/\D/g,'');
-    return (v.length > 11) ? this.maskCnpj(v) : this.maskCpf(v);
+    return (v.length > 11) ? this.maskCnpj() : this.maskCpf();
   }
 
   dataset(context) {
@@ -49,7 +49,7 @@ class BaseInput extends Nullstack {
     }, {});
   }
 
-  render({value, name, placeholder, class: klass, id, mask}) {
+  render({value, name, placeholder, class: klass, id, disabled, mask}) {
     return (
       <input
         type="tel"
@@ -60,6 +60,7 @@ class BaseInput extends Nullstack {
         oninput={this.parse}
         class={klass}
         id={id}
+        disabled={disabled}
         {...this.dataset()}
       />
     )

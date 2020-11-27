@@ -127,6 +127,16 @@ class Application extends Nullstack {
 export default Application;
 ```
 
+## Customization
+
+You can customize the following attributes:
+
+- id
+- class
+- placeholder
+- disabled
+- data-*
+
 ## License
 
 Nullstack CPF CNPJ Input is released under the [MIT License](https://opensource.org/licenses/MIT).
