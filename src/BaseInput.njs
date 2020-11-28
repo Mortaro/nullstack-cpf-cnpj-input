@@ -33,6 +33,7 @@ class BaseInput extends Nullstack {
     } else if(v.length > 3) {
       return `${v.slice(0,2)}.${v.slice(2,5)}`;
     }
+    return v;
   }
 
   maskCpfCnpj({value}) {
