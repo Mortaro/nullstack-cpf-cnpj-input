@@ -1,6 +1,6 @@
 {
   "name": "nullstack-cpf-cnpj-input",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CPF and CNPJ inputs for Nullstack",
   "main": "src/index.js",
   "author": "Mortaro",
