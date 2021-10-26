@@ -1,56 +1,66 @@
-import Nullstack from 'nullstack';
+import Nullstack from "nullstack";
 
 class BaseInput extends Nullstack {
-  
-  parse({event, onchange}) {
-    const value = event.target.value.replace(/\D/g,'');
-    const documentType = value.length > 11 ? 'CNPJ' : 'CPF';
-    onchange({value, documentType});
+  parse({ event, onchange }) {
+    const value = event.target.value.replace(/\D/g, "");
+    const documentType = value.length > 11 ? "CNPJ" : "CPF";
+    onchange({ value, documentType });
   }
 
-  maskCpf({value}) {
-    const v = value.replace(/\D/g, '');
-    if(v.length > 9) {
-      return `${v.slice(0,3)}.${v.slice(3,6)}.${v.slice(6,9)}-${v.slice(9,11)}`;
-    } 
-    if(v.length > 6) {
-      return `${v.slice(0,3)}.${v.slice(3,6)}.${v.slice(6,9)}`;
+  maskCpf({ value }) {
+    const v = value.replace(/\D/g, "");
+    if (v.length > 9) {
+      return `${v.slice(0, 3)}.${v.slice(3, 6)}.${v.slice(6, 9)}-${v.slice(
+        9,
+        11
+      )}`;
     }
-    if(v.length > 3) {
-      return `${v.slice(0,3)}.${v.slice(3,6)}`;
+    if (v.length > 6) {
+      return `${v.slice(0, 3)}.${v.slice(3, 6)}.${v.slice(6, 9)}`;
     }
-    return v;
-  }
-
-  maskCnpj({value}) {
-    const v = value.replace(/\D/g,'');
-    if(v.length > 11) {
-      return `${v.slice(0,2)}.${v.slice(2,5)}.${v.slice(5,8)}/${v.slice(8,12)}-${v.slice(12,14)}`;
-    } else if(v.length > 8) {
-      return `${v.slice(0,2)}.${v.slice(2,5)}.${v.slice(5,8)}/${v.slice(8,12)}`;
-    } else if(v.length > 5) {
-      return `${v.slice(0,2)}.${v.slice(2,5)}.${v.slice(5,8)}`;
-    } else if(v.length > 3) {
-      return `${v.slice(0,2)}.${v.slice(2,5)}`;
+    if (v.length > 3) {
+      return `${v.slice(0, 3)}.${v.slice(3, 6)}`;
     }
     return v;
   }
 
-  maskCpfCnpj({value}) {
-    const v = value.replace(/\D/g,'');
-    return (v.length > 11) ? this.maskCnpj() : this.maskCpf();
+  maskCnpj({ value }) {
+    const v = value.replace(/\D/g, "");
+    if (v.length > 12) {
+      return `${v.slice(0, 2)}.${v.slice(2, 5)}.${v.slice(5, 8)}/${v.slice(
+        8,
+        12
+      )}-${v.slice(12, 14)}`;
+    } else if (v.length > 8) {
+      return `${v.slice(0, 2)}.${v.slice(2, 5)}.${v.slice(5, 8)}/${v.slice(
+        8,
+        12
+      )}`;
+    } else if (v.length > 5) {
+      return `${v.slice(0, 2)}.${v.slice(2, 5)}.${v.slice(5, 8)}`;
+    } else if (v.length > 2) {
+      return `${v.slice(0, 2)}.${v.slice(2, 5)}`;
+    }
+    return v;
+  }
+
+  maskCpfCnpj({ value }) {
+    const v = value.replace(/\D/g, "");
+    return v.length > 11 ? this.maskCnpj() : this.maskCpf();
   }
 
   dataset(context) {
-    return Object.keys(context).filter((key) => {
-      return key.startsWith('data');
-    }).reduce((accumulator, key) => {
-      accumulator[key] = context[key];
-      return accumulator;
-    }, {});
+    return Object.keys(context)
+      .filter((key) => {
+        return key.startsWith("data");
+      })
+      .reduce((accumulator, key) => {
+        accumulator[key] = context[key];
+        return accumulator;
+      }, {});
   }
 
-  render({value, name, placeholder, class: klass, id, disabled, mask}) {
+  render({ value, name, placeholder, class: klass, id, disabled, mask }) {
     return (
       <input
         type="tel"
@@ -64,9 +74,8 @@ class BaseInput extends Nullstack {
         disabled={disabled}
         {...this.dataset()}
       />
-    )
+    );
   }
-
 }
 
 export default BaseInput;
